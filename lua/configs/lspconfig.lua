@@ -11,14 +11,27 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- Configure TypeScript with Vue plugin support
+local function get_vue_language_server_path()
+  local handle = io.popen("npm root -g")
+  if handle then
+    local result = handle:read("*a")
+    handle:close()
+    return result:gsub("%s+", "") .. "/@vue/language-server"
+  end
+  return nil
+end
+
 vim.lsp.config("ts_ls", {
   init_options = {
     plugins = {
       {
         name = "@vue/typescript-plugin",
-        location = vim.fn.expand("$HOME/.nvm/versions/node/v22.13.0/lib/node_modules/@vue/language-server"),
+        location = get_vue_language_server_path(),
         languages = { "vue" },
       },
+    },
+    tsserver = {
+      path = vim.fn.getcwd() .. "/node_modules/typescript/lib",
     },
   },
   filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
