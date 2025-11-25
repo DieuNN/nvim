@@ -34,6 +34,15 @@ return {
     },
   },
 
+  -- Comment.nvim - Smart and powerful commenting
+  {
+    "numToStr/Comment.nvim",
+    config = function()
+      require("Comment").setup()
+    end,
+    lazy = false,
+  },
+
   -- Neogit - Magit-like Git interface for Neovim
   {
     "NeogitOrg/neogit",
