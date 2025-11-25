@@ -71,4 +71,28 @@ return {
       { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit" },
     },
   },
+
+  -- Flutter Tools - Flutter development with LSP support
+  {
+    "nvim-flutter/flutter-tools.nvim",
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "stevearc/dressing.nvim",
+    },
+    config = function()
+      require("flutter-tools").setup({
+        fvm = true,  -- Enable FVM support
+        lsp = {
+          settings = {
+            showtodos = true,
+            completefunctioncalls = true,
+            renamefileswithclasses = "always",
+            updateimportsonrename = true,
+          },
+        },
+      })
+    end,
+    ft = "dart",
+  },
 }
