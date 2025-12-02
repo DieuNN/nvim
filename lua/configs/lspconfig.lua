@@ -76,8 +76,30 @@ vim.lsp.config("vue_ls", {
   },
 })
 
+-- Configure clangd for C/C++ development
+vim.lsp.config("clangd", {
+  cmd = {
+    "clangd",
+    "--background-index",
+    "--clang-tidy",
+    "--header-insertion=iwyu",
+    "--completion-style=detailed",
+    "--function-arg-placeholders",
+  },
+  filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+  settings = {
+    clangd = {
+      inlayHints = {
+        designatedStrings = true,
+        parameterNames = true,
+        blockEnd = true,
+      },
+    },
+  },
+})
+
 -- Enable language servers
-local servers = { "html", "cssls", "vue_ls", "ts_ls" }
+local servers = { "html", "cssls", "vue_ls", "ts_ls", "clangd" }
 vim.lsp.enable(servers)
 
 -- read :h vim.lsp.config for changing options of lsp servers 
