@@ -95,4 +95,57 @@ return {
     end,
     ft = "dart",
   },
+
+  -- Blame.nvim - Git blame annotations
+  {
+    "FabijanZulj/blame.nvim",
+    config = function()
+      require("blame").setup()
+    end,
+    cmd = { "BlameToggle" },
+  },
+
+  -- GitLab.nvim - GitLab integration for merge requests and code review
+  {
+    "harrisoncramer/gitlab.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "stevearc/dressing.nvim",
+    },
+    enabled = true,
+    build = function()
+      require("gitlab.server").build(true)
+    end,
+    config = function()
+      require("gitlab").setup({
+        statusline = {
+          enabled = true  -- Show GitLab Duo Code Suggestions status
+        },
+      })
+    end,
+    keys = {
+      { "<leader>glr", "<cmd>lua require('gitlab').review()<cr>", desc = "GitLab review" },
+      { "<leader>gls", "<cmd>lua require('gitlab').summary()<cr>", desc = "GitLab summary" },
+      { "<leader>glA", "<cmd>lua require('gitlab').approve()<cr>", desc = "GitLab approve MR" },
+      { "<leader>glR", "<cmd>lua require('gitlab').revoke()<cr>", desc = "GitLab revoke approval" },
+      { "<leader>glc", "<cmd>lua require('gitlab').create_comment()<cr>", desc = "GitLab create comment" },
+      { "<leader>glC", "<cmd>lua require('gitlab').create_multiline_comment()<cr>", desc = "GitLab multiline comment", mode = "v" },
+      { "<leader>glO", "<cmd>lua require('gitlab').create_comment_suggestion()<cr>", desc = "GitLab comment suggestion", mode = "v" },
+      { "<leader>glm", "<cmd>lua require('gitlab').move_to_discussion_tree_from_diagnostic()<cr>", desc = "GitLab move to discussion" },
+      { "<leader>gln", "<cmd>lua require('gitlab').create_note()<cr>", desc = "GitLab create note" },
+      { "<leader>gld", "<cmd>lua require('gitlab').toggle_discussions()<cr>", desc = "GitLab toggle discussions" },
+      { "<leader>glaa", "<cmd>lua require('gitlab').add_assignee()<cr>", desc = "GitLab add assignee" },
+      { "<leader>glad", "<cmd>lua require('gitlab').delete_assignee()<cr>", desc = "GitLab delete assignee" },
+      { "<leader>glra", "<cmd>lua require('gitlab').add_reviewer()<cr>", desc = "GitLab add reviewer" },
+      { "<leader>glrd", "<cmd>lua require('gitlab').delete_reviewer()<cr>", desc = "GitLab delete reviewer" },
+      { "<leader>glp", "<cmd>lua require('gitlab').pipeline()<cr>", desc = "GitLab pipeline" },
+      { "<leader>glo", "<cmd>lua require('gitlab').open_in_browser()<cr>", desc = "GitLab open in browser" },
+      { "<leader>glM", "<cmd>lua require('gitlab').merge()<cr>", desc = "GitLab merge MR" },
+      { "<leader>glu", "<cmd>lua require('gitlab').copy_mr_url()<cr>", desc = "GitLab copy MR URL" },
+      { "<leader>glP", "<cmd>lua require('gitlab').publish_all_drafts()<cr>", desc = "GitLab publish drafts" },
+      { "<leader>glD", "<cmd>lua require('gitlab').toggle_all_discussions()<cr>", desc = "GitLab toggle all discussions" },
+    },
+  },
 }
