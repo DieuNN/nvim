@@ -105,6 +105,18 @@ return {
     cmd = { "BlameToggle" },
   },
 
+  -- Render Markdown - Beautiful markdown rendering in Neovim
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+    opts = {},
+    ft = "markdown",
+    cmd = { "RenderMarkdown" },
+  },
+
   -- GitLab.nvim - GitLab integration for merge requests and code review
   {
     "harrisoncramer/gitlab.nvim",
