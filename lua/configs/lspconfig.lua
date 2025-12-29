@@ -99,7 +99,7 @@ vim.lsp.config("clangd", {
 })
 
 -- Enable language servers
-local servers = { "html", "cssls", "vue_ls", "ts_ls", "clangd" }
+local servers = { "html", "cssls", "vue_ls", "ts_ls", "clangd", "tailwindcss" }
 vim.lsp.enable(servers)
 
 -- read :h vim.lsp.config for changing options of lsp servers 
