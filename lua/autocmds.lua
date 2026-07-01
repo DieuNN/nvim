@@ -2,6 +2,21 @@ require "nvchad.autocmds"
 
 local autocmd = vim.api.nvim_create_autocmd
 
+-- Termux: treesitter decoration provider is broken (extmarks = 0)
+-- NvChad's FileType autocmd calls vim.treesitter.start() which sets syntax=''
+-- This restores regex-based syntax highlighting as fallback
+if vim.fn.executable "termux-open" == 1 then
+  autocmd("FileType", {
+    pattern = "*",
+    callback = function()
+      if vim.bo.syntax == "" and vim.bo.filetype ~= "" then
+        vim.bo.syntax = vim.bo.filetype
+      end
+    end,
+    group = vim.api.nvim_create_augroup("TermuxTsFix", { clear = true }),
+  })
+end
+
 -- Open images in default viewer (Cross-platform)
 autocmd("BufReadPost", {
   pattern = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" },
