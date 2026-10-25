@@ -1,6 +1,7 @@
 require "nvchad.options"
 
--- add yours here!
-
 -- local o = vim.o
--- o.cursorlineopt ='both' -- to enable cursorline!
+
+if vim.fn.executable "termux-open" == 1 then
+  vim.cmd "syntax on" -- treesitter decoration provider broken on Termux (extmarks=0)
+end
